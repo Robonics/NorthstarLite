@@ -35,6 +35,11 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber;
 import net.minecraftforge.fml.common.Mod.EventBusSubscriber.Bus;
 
+/**
+ * TODO: Pretty much everything. This class will need to be refactored to accept a TemperatureProvider object
+ * and call methods on that to return data to parts of the mod that need it
+ */
+
 @EventBusSubscriber(modid = Northstar.MOD_ID, bus = Bus.FORGE)
 public class TemperatureStuff {
 	public static HashMap<HashMap<BlockPos, Integer>,ResourceKey<Level>> temperatureSources = new HashMap<HashMap<BlockPos, Integer>, ResourceKey<Level>>();
