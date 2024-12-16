@@ -17,6 +17,7 @@ import com.lightning.northstar.client.renderer.armor.IronSpaceSuitLayerRenderer;
 import com.lightning.northstar.client.renderer.armor.IronSpaceSuitModelRenderer;
 import com.lightning.northstar.client.renderer.armor.MartianSteelSpaceSuitLayerRenderer;
 import com.lightning.northstar.client.renderer.armor.MartianSteelSpaceSuitModelRenderer;
+import com.lightning.northstar.config.NorthstarConfigs;
 import com.lightning.northstar.contraptions.NorthstarContraptionTypes;
 import com.lightning.northstar.contraptions.RocketHandler;
 import com.lightning.northstar.entity.MarsCobraEntity;
@@ -75,6 +76,7 @@ import net.minecraftforge.event.entity.SpawnPlacementRegisterEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.DistExecutor;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
@@ -82,6 +84,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.ForgeRegistries;
 import software.bernie.geckolib3.GeckoLib;
 import software.bernie.geckolib3.renderers.geo.GeoArmorRenderer;
+import net.minecraftforge.fml.config.ModConfig;
 
 // The value here should match an entry in the META-INF/mods.toml file
 @Mod(Northstar.MOD_ID)
@@ -145,6 +148,9 @@ public class Northstar
         RocketHandler.register();
         
         GeckoLib.initialize();
+
+		ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, NorthstarConfigs.SPEC, "northstar-common.toml");
+
         // Register the commonSetup method for modloading
 		modEventBus.addListener(Northstar::init);
         modEventBus.addListener(this::commonSetup);
