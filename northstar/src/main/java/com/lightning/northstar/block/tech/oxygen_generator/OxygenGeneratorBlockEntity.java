@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.lightning.northstar.NorthstarTags;
+import com.lightning.northstar.config.NorthstarConfigs;
 import com.lightning.northstar.fluids.NorthstarFluids;
 import com.lightning.northstar.particle.OxyFlowParticleData;
 import com.lightning.northstar.sound.NorthstarSounds;
@@ -54,7 +55,7 @@ public class OxygenGeneratorBlockEntity extends KineticBlockEntity implements IH
 				&& this.tank.getPrimaryHandler().getFluid().getAmount() >= minOxy;
 		
 		long i = level.getGameTime();
-		maxOxy = (int) (Math.abs(this.speed) * 20);
+		maxOxy = (int) (Math.abs(this.speed) * NorthstarConfigs.OXYGEN_SEALER_MAX_VOLUME.get());
 	  
 		if(Math.abs(this.speed) > 0 && !isOverStressed() && hasOxy) {
 			BlockPos pos = getBlockPos();
@@ -102,7 +103,8 @@ public class OxygenGeneratorBlockEntity extends KineticBlockEntity implements IH
       }else if(i % 40L == 0L && (Math.abs(this.speed) == 0 || isOverStressed()) || !hasOxy){
     	  removeOxy(this, OXYGEN_BLOBS);
       }
-	}	public void removeOxy(OxygenGeneratorBlockEntity entity, Set<BlockPos> newlist) {
+	}
+	public void removeOxy(OxygenGeneratorBlockEntity entity, Set<BlockPos> newlist) {
 		OxygenStuff.removeSource(source, level, entity.OXYGEN_BLOBS, newlist);
 		entity.OXYGEN_BLOBS.clear();
 	}
